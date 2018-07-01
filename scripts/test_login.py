@@ -15,8 +15,10 @@ class TestLogin:
         # 我的点击登录
         self.page.mine.click_login_signup()
         # 登录页面输入用户名
-        # self.page.login.xxxxx
+        self.page.login.input_username("18503080305")
         # 登录页面输入密码
+        self.page.login.input_password("123000")
         # 登录页面点击登录
+        self.page.login.click_login()
 
-        assert 1
+
