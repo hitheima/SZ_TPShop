@@ -7,9 +7,7 @@ class TestLogin:
         self.driver = init_driver()
         self.page = Page(self.driver)
 
-    def test_login1(self):
-        print("hehe")
-
+    def test_login(self):
         # 主页点击我的
         self.page.home.click_mine()
         # 我的点击登录
@@ -20,5 +18,8 @@ class TestLogin:
         self.page.login.input_password("123000")
         # 登录页面点击登录
         self.page.login.click_login()
+
+        # self.page.login.is_toast_exist("登录成功")
+        assert "登录成功" == self.page.login.find_toast("登录成功")
 
 
