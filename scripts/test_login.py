@@ -59,11 +59,15 @@ class TestLogin:
         # 点击显示密码
         self.page.login.click_show_password()
 
-        try:
-            self.page.login.find_element((By.XPATH, "text," + password))
-            assert True
-        except Exception:
-            assert False
+        # 判断当初输入的密码是否存在
+        assert self.page.login.is_feature_exist((By.XPATH, "text," + password))
+
+
+        # try:
+        #     self.page.login.find_element((By.XPATH, "text," + password))
+        #     assert True
+        # except Exception:
+        #     assert False
 
 
 

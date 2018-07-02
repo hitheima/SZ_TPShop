@@ -125,3 +125,10 @@ class BaseAction:
         else:
             return False
 
+    def is_feature_exist(self, feature):
+        try:
+            self.find_element(feature)
+            return True
+        except Exception:
+            return False
+
