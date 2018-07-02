@@ -18,13 +18,13 @@ def random_password():
         password += str(random.randint(0, 9))
     return password
 
+
 def show_password_data():
     data_list = list()
     data_list.append(random_password())
     data_list.append(random_password())
     data_list.append(random_password())
     return data_list
-
 
 
 class TestLogin:
@@ -68,10 +68,9 @@ class TestLogin:
     #         self.page.login.input_password(password)
     #     assert not self.page.login.is_login_button_enabled()
 
-
     @pytest.mark.parametrize("password", show_password_data())
     def test_show_password(self, password):
-        # password = args
+        password_feature = By.XPATH, "text," + password
 
         # 主页点击我的
         self.page.home.click_mine()
@@ -80,44 +79,10 @@ class TestLogin:
         # 输入密码
         self.page.login.input_password(password)
 
-        # if 真        真
-        # if 假        假
-
-        if self.page.login.is_feature_exist((By.XPATH, "text," + password)):
+        if self.page.login.is_feature_exist(password_feature):
             assert False
         else:
             # 点击显示密码
             self.page.login.click_show_password()
             # 判断当初输入的密码是否存在
-            assert self.page.login.is_feature_exist((By.XPATH, "text," + password))
-
-
-        # # if 真 == 假       假
-        # # if 假 == 假       真
-        #
-        # # if 真       假
-        # # if 假       真
-
-        #
-        # if not self.page.login.is_feature_exist((By.XPATH, "text," + password)):
-        #     # 点击显示密码
-        #     self.page.login.click_show_password()
-        #     # 判断当初输入的密码是否存在
-        #     assert self.page.login.is_feature_exist((By.XPATH, "text," + password))
-        # else:
-        #     assert False
-
-
-
-
-
-
-        # try:
-        #     self.page.login.find_element((By.XPATH, "text," + password))
-        #     assert True
-        # except Exception:
-        #     assert False
-
-
-
-
+            assert self.page.login.is_feature_exist(password_feature)
