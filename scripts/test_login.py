@@ -19,7 +19,6 @@ class TestLogin:
         # 登录页面点击登录
         self.page.login.click_login()
 
-        # self.page.login.is_toast_exist("登录成功")
-        assert "登录成功" == self.page.login.find_toast("登录成功")
+        assert self.page.login.is_toast_exist("登录成功")
 
 
