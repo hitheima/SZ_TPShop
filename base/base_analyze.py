@@ -10,8 +10,6 @@ def analyze_data(key):
     end_index = file_name.rfind(".")
     file_name = file_name[start_index + 1: end_index] + "_data"
 
-    print(file_name)
-
     with open("./data/" + file_name + ".yml", 'r') as f:
         data = yaml.load(f)
         script_data = data[key]
