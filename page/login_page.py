@@ -25,11 +25,4 @@ class LoginPage(BaseAction):
         self.click(self.login_button)
 
     def is_login_button_enabled(self):
-        """
-        返回登录按钮的enabled的状态
-        :return:
-        """
-        if self.find_element(self.login_button).get_attribute("enabled") == "true":
-            return True
-        else:
-            return False
+        return self.is_feature_enabled(self.login_button)

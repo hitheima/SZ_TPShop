@@ -119,3 +119,9 @@ class BaseAction:
         except Exception:
             return False
 
+    def is_feature_enabled(self, feature):
+        if self.find_element(feature).get_attribute("enabled") == "true":
+            return True
+        else:
+            return False
+
