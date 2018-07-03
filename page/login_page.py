@@ -26,6 +26,17 @@ class LoginPage(BaseAction):
     def click_login(self):
         self.click(self.login_button)
 
+    def login(self):
+        """
+        只要调用这个函数
+        就能登录
+        进入登录界面之后 调用
+        :return:
+        """
+        self.input_username("18503080305")
+        self.input_password("123000")
+        self.click_login()
+
     def is_login_button_enabled(self):
         return self.is_feature_enabled(self.login_button)
 
