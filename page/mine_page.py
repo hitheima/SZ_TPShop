@@ -15,6 +15,9 @@ class MinePage(BaseAction):
     # 收货地址
     address_feature = By.XPATH, "text,收货地址"
 
+    # 收货地址、拼团订单等的标题的特征
+    txtv_feature = By.ID, "com.tpshop.malls:id/title_txtv"
+
     @allure.step(title="我的页面点击登录/注册按钮")
     def click_login_signup(self):
         self.click(self.login_signup_button)

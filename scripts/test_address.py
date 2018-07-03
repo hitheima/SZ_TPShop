@@ -23,6 +23,10 @@ class TestAddress:
             # 登录
             self.page.login.login()
 
-        # 点击收货地址
-        self.page.mine.click_address()
+        if self.page.mine.is_scroll_page_until_feature(self.page.mine.txtv_feature, "分销中心"):
+            # 点击收货地址
+            self.page.mine.click_address()
+            # 填写收货地址
+
+
 

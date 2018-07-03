@@ -1,3 +1,4 @@
+import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
@@ -157,11 +158,13 @@ class BaseAction:
         start_x, start_y, end_x, end_y = 0, 0, 0, 0
 
         if dir == "up" or "down":
+            print("up")
             start_x = center_x
             start_y = screen_height * 0.75
             end_x = center_x
             end_y = screen_height * 0.25
         if dir == "left" or "right":
+            print("down")
             start_x = screen_width * 0.75
             start_y = center_y
             end_x = screen_width * 0.25
@@ -173,6 +176,8 @@ class BaseAction:
             self.driver.swipe(end_x, end_y, start_x, start_y, 3000)
         else:
             raise Exception("dir参数只能使用 up/down/left/right")
+
+        time.sleep(1)
 
     def is_scroll_page_until_feature(self, feature, element_text, dir="up"):
         """
@@ -186,6 +191,8 @@ class BaseAction:
         while True:
             new = ""
             eles = self.find_elements(feature)
+
+            print(eles)
 
             for i in eles:
                 text = i.text

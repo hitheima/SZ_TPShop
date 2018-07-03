@@ -87,7 +87,3 @@ class TestLogin:
     #         # 判断当初输入的密码是否存在
     #         assert self.page.login.is_feature_exist(password_feature)
 
-    def test_is_login(self):
-        self.page.home.click_mine()
-
-        print(self.page.mine.is_login())
