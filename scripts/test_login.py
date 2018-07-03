@@ -68,21 +68,26 @@ class TestLogin:
     #         self.page.login.input_password(password)
     #     assert not self.page.login.is_login_button_enabled()
 
-    @pytest.mark.parametrize("password", show_password_data())
-    def test_show_password(self, password):
-        password_feature = By.XPATH, "text," + password
+    # @pytest.mark.parametrize("password", show_password_data())
+    # def test_show_password(self, password):
+    #     password_feature = By.XPATH, "text," + password
+    #
+    #     # 主页点击我的
+    #     self.page.home.click_mine()
+    #     # 我的点击登录
+    #     self.page.mine.click_login_signup()
+    #     # 输入密码
+    #     self.page.login.input_password(password)
+    #
+    #     if self.page.login.is_feature_exist(password_feature):
+    #         assert False
+    #     else:
+    #         # 点击显示密码
+    #         self.page.login.click_show_password()
+    #         # 判断当初输入的密码是否存在
+    #         assert self.page.login.is_feature_exist(password_feature)
 
-        # 主页点击我的
+    def test_is_login(self):
         self.page.home.click_mine()
-        # 我的点击登录
-        self.page.mine.click_login_signup()
-        # 输入密码
-        self.page.login.input_password(password)
 
-        if self.page.login.is_feature_exist(password_feature):
-            assert False
-        else:
-            # 点击显示密码
-            self.page.login.click_show_password()
-            # 判断当初输入的密码是否存在
-            assert self.page.login.is_feature_exist(password_feature)
+        print(self.page.mine.is_login())

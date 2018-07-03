@@ -132,3 +132,16 @@ class BaseAction:
         except Exception:
             return False
 
+    def press_key_code(self, key_code):
+        """
+        执行keycode
+        并且会根据有没有使用automationName这个key
+        执行对应的发送时间方法
+        :param key_code:
+        :return:
+        """
+        if "automationName" in self.driver.capabilities.keys():
+            self.driver.press_keycode(key_code)
+        else:
+            self.driver.keyevent(key_code)
+
