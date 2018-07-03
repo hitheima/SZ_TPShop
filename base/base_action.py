@@ -145,3 +145,62 @@ class BaseAction:
         else:
             self.driver.keyevent(key_code)
 
+    def scroll_page_one_time(self, dir="up"):
+
+        # 滑动
+        screen_width = self.driver.get_window_size()["width"]
+        screen_height = self.driver.get_window_size()["height"]
+
+        center_x = screen_width * 0.5
+        center_y = screen_height * 0.5
+
+        start_x, start_y, end_x, end_y = 0, 0, 0, 0
+
+        if dir == "up" or "down":
+            start_x = center_x
+            start_y = screen_height * 0.75
+            end_x = center_x
+            end_y = screen_height * 0.25
+        if dir == "left" or "right":
+            start_x = screen_width * 0.75
+            start_y = center_y
+            end_x = screen_width * 0.25
+            end_y = center_y
+
+        if dir == "up" or "left":
+            self.driver.swipe(start_x, start_y, end_x, end_y, 3000)
+        elif dir == "down" or "right":
+            self.driver.swipe(end_x, end_y, start_x, start_y, 3000)
+        else:
+            raise Exception("dir参数只能使用 up/down/left/right")
+
+    def is_scroll_page_until_feature(self, feature, element_text, dir="up"):
+        """
+        滑动当前页面，直到某组feature的元素，是否有element_text的文字
+        :param feature: 元素的特征
+        :param element_text: 寻找的元素的文字内容
+        :param dir: 方向 up:从下往上 down:从上往下 left:从右往左 right:从左往右
+        :return:
+        """
+        old = ""
+        while True:
+            new = ""
+            eles = self.find_elements(feature)
+
+            for i in eles:
+                text = i.text
+                new += text
+
+                if text == element_text:
+                    return True
+
+            if old == new:
+                return False
+            else:
+                old = new
+
+            self.scroll_page_one_time(dir)
+
+
+
+

@@ -24,4 +24,5 @@ class TestAddress:
             self.page.login.login()
 
         # 点击收货地址
+        self.page.mine.click_address()
 
