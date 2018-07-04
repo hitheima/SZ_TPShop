@@ -48,14 +48,23 @@
 
 
 
-dir = "up"
+# dir = "up"
+#
+# if dir == "up" or dir == "down":  # 有问题的
+#     print("up")
+# elif dir == "left" or dir == "right":
+#     print("down")
+#
+# if dir in ["up", "down"]:  # 有问题的
+#     print("up")
+# elif dir in ["left", "right"]:
+#     print("down")
 
-if dir == "up" or dir == "down":  # 有问题的
-    print("up")
-elif dir == "left" or dir == "right":
-    print("down")
+import random
 
-if dir in ["up", "down"]:  # 有问题的
-    print("up")
-elif dir in ["left", "right"]:
-    print("down")
+hello = [1, 2, 3, 4, 5, 6, 7, 8 ,9]
+
+eles = random.sample(hello, 1)
+
+print(type(eles))
+print(eles[0])
