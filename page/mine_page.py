@@ -13,7 +13,7 @@ class MinePage(BaseAction):
     title_feature = By.ID, "com.tpshop.malls:id/titlebar_title_txtv"
 
     # 收货地址
-    address_feature = By.XPATH, "text,收货地址"
+    address_feature = By.XPATH, ("text,收货地址", "resource-id,com.tpshop.malls:id/title_txtv")
 
     # 收货地址、拼团订单等的标题的特征
     txtv_feature = By.ID, "com.tpshop.malls:id/title_txtv"

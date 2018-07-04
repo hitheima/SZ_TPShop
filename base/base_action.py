@@ -146,8 +146,13 @@ class BaseAction:
         else:
             self.driver.keyevent(key_code)
 
-    def scroll_page_one_time(self, dir="up"):
-
+    def scroll_page_one_time(self, direction="up"):
+        """
+        调用一次滑动一屏
+        :param direction: 方向 默认为从下往上
+            "up":从下往上 "down":从上往下 "left":从右往左 "right":从左往右
+        :return:
+        """
         # 滑动
         screen_width = self.driver.get_window_size()["width"]
         screen_height = self.driver.get_window_size()["height"]
@@ -157,57 +162,45 @@ class BaseAction:
 
         start_x, start_y, end_x, end_y = 0, 0, 0, 0
 
-        if dir == "up" or dir == "down":  # 没问题的
+        if direction == "up" or direction == "down":  # 没问题的
             print("up")
             start_x = center_x
             start_y = screen_height * 0.75
             end_x = center_x
             end_y = screen_height * 0.25
-        elif dir == "left" or dir == "right":
+        elif direction == "left" or direction == "right":
             print("down")
             start_x = screen_width * 0.75
             start_y = center_y
             end_x = screen_width * 0.25
             end_y = center_y
 
-        if dir == "up" or dir == "left":
+        if direction == "up" or direction == "left":
             self.driver.swipe(start_x, start_y, end_x, end_y, 3000)
-        elif dir == "down" or dir == "right":
+        elif direction == "down" or direction == "right":
             self.driver.swipe(end_x, end_y, start_x, start_y, 3000)
         else:
-            raise Exception("dir参数只能使用 up/down/left/right")
+            raise Exception("direction参数只能使用 up/down/left/right")
 
         time.sleep(1)
 
-    def is_scroll_page_until_feature(self, feature, element_text, dir="up"):
+    def is_feture_exist_scroll_page(self, feature, direction="up"):
         """
-        滑动当前页面，直到某组feature的元素，是否有element_text的文字
-        :param feature: 元素的特征
-        :param element_text: 寻找的元素的文字内容
-        :param dir: 方向 up:从下往上 down:从上往下 left:从右往左 right:从左往右
+        滑动查找某个特征是否存在，并返回
+        :param feature: 特征
+        :param direction: 方向 默认为从下往上
+            "up":从下往上 "down":从上往下 "left":从右往左 "right":从左往右
         :return:
         """
-        old = ""
+        record = ""
         while True:
-            new = ""
-            eles = self.find_elements(feature)
-
-            print(eles)
-
-            for i in eles:
-                text = i.text
-                new += text
-
-                if text == element_text:
-                    return True
-
-            if old == new:
+            if record == self.driver.page_source:
                 return False
             else:
-                old = new
-
-            self.scroll_page_one_time(dir)
-
-
-
+                record = self.driver.page_source
+            try:
+                self.find_element(feature)
+                return True
+            except Exception:
+                self.scroll_page_one_time(direction)
 
