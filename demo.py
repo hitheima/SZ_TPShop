@@ -46,10 +46,16 @@
 
 
 
-string = "2"
 
-# if string == "1" or "2":
-#     print("111")
-#
-if "2":
-    print("222")
+
+dir = "up"
+
+if dir == "up" or dir == "down":  # 有问题的
+    print("up")
+elif dir == "left" or dir == "right":
+    print("down")
+
+if dir in ["up", "down"]:  # 有问题的
+    print("up")
+elif dir in ["left", "right"]:
+    print("down")

@@ -157,22 +157,22 @@ class BaseAction:
 
         start_x, start_y, end_x, end_y = 0, 0, 0, 0
 
-        if dir == "up" or "down":
+        if dir == "up" or dir == "down":  # 没问题的
             print("up")
             start_x = center_x
             start_y = screen_height * 0.75
             end_x = center_x
             end_y = screen_height * 0.25
-        if dir == "left" or "right":
+        elif dir == "left" or dir == "right":
             print("down")
             start_x = screen_width * 0.75
             start_y = center_y
             end_x = screen_width * 0.25
             end_y = center_y
 
-        if dir == "up" or "left":
+        if dir == "up" or dir == "left":
             self.driver.swipe(start_x, start_y, end_x, end_y, 3000)
-        elif dir == "down" or "right":
+        elif dir == "down" or dir == "right":
             self.driver.swipe(end_x, end_y, start_x, start_y, 3000)
         else:
             raise Exception("dir参数只能使用 up/down/left/right")
